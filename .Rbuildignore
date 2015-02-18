@@ -1,6 +1,6 @@
 stuff
-src/*.o
-src/*.so
+^src/*.o$
+^src/*.so$
 ^.*tar.gz$
 ^.*\.swp$
 .gitignore
