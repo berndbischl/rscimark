@@ -1,0 +1,8 @@
+rscimark.Rcheck
+rscimark_*.tar.gz
+.Rproj.user
+*.Rproj
+.Rhistory
+src/*.so
+src/*.o
+

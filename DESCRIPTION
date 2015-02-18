@@ -1,0 +1,18 @@
+Package: rscimark
+Title: rscimark
+Description: Miscellaneous helper functions for and from B. Bischl and
+    some other guys at TU Dortmund, mainly for package development.
+Authors@R: c(person("Bernd", "Bischl", email = "bernd_bischl@gmx.net",
+    role = c("aut", "cre"))) 
+URL: https://github.com/berndbischl/scimark
+BugReports: https://github.com/berndbischl/rscimark/issues
+License: BSD_3_clause + file LICENSE
+Encoding: UTF-8
+Roxygen: list(wrap = FALSE)
+Imports:
+  checkmate
+Suggests:
+    testthat
+LazyData: yes
+ByteCompile: yes
+Version: 1.0
