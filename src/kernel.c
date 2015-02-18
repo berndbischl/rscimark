@@ -5,11 +5,12 @@
 #include "SOR.h"
 #include "MonteCarlo.h"
 #include "LU.h"
-#include "Random.h" 
-#include "Stopwatch.h"  
+#include "Random.h"
+#include "Stopwatch.h"
 #include "SparseCompRow.h"
 #include "array.h"
 
+#include "Rf_error.h"
 
     double kernel_measureFFT(int N, double mintime, Random R)
     {
@@ -95,7 +96,7 @@
     }
 
 
-    double kernel_measureSparseMatMult(int N, int nz, 
+    double kernel_measureSparseMatMult(int N, int nz,
             double min_time, Random R)
     {
         /* initialize vector multipliers and storage for result */
@@ -121,7 +122,7 @@
         //             +**  *   *        +
         //             +* *   *   *      +
         //             +*  *   *    *    +
-        //             +*   *    *    *  + 
+        //             +*   *    *    *  +
         //             +-----------------+
         //
         // (as best reproducible with integer artihmetic)
@@ -132,7 +133,7 @@
         int nr = nz/N;      /* average number of nonzeros per row  */
         int anz = nr *N;    /* _actual_ number of nonzeros         */
 
-            
+
         double *val = RandomVector(anz, R);
         int *col = (int*) malloc(sizeof(int)*nz);
         int *row = (int*) malloc(sizeof(int)*(N+1));
@@ -141,7 +142,7 @@
 
         Stopwatch Q = new_Stopwatch();
 
-        row[0] = 0; 
+        row[0] = 0;
         for (r=0; r<N; r++)
         {
             /* initialize elements for row r */
@@ -156,7 +157,7 @@
 
             for (i=0; i<nr; i++)
                 col[rowr+i] = i*step;
-                
+
         }
 
 
@@ -170,7 +171,7 @@
             cycles *= 2;
         }
         /* approx Mflops */
-        result = SparseCompRow_num_flops(N, nz, cycles) / 
+        result = SparseCompRow_num_flops(N, nz, cycles) /
                         Stopwatch_read(Q) * 1.0e-6;
 
         Stopwatch_delete(Q);
@@ -188,19 +189,22 @@
     {
 
         double **A = NULL;
-        double **lu = NULL; 
+        double **lu = NULL;
         int *pivot = NULL;
 
-    
+
 
         Stopwatch Q = new_Stopwatch();
         double result = 0.0;
         int i=0;
         int cycles=1;
 
-        if ((A = RandomMatrix(N, N,  R)) == NULL) exit(1);
-        if ((lu = new_Array2D_double(N, N)) == NULL) exit(1);
-        if ((pivot = (int *) malloc(N * sizeof(int))) == NULL) exit(1);
+        if ((A = RandomMatrix(N, N,  R)) == NULL)
+          Rf_error("Should not happen!");
+        if ((lu = new_Array2D_double(N, N)) == NULL)
+          Rf_error("Should not happen!");
+        if ((pivot = (int *) malloc(N * sizeof(int))) == NULL)
+          Rf_error("Should not happen!");
 
 
         while(1)
@@ -220,8 +224,8 @@
         result = LU_num_flops(N) * cycles / Stopwatch_read(Q) * 1.0e-6;
 
         Stopwatch_delete(Q);
-        free(pivot); 
-        Array2D_double_delete(N, N, lu); 
+        free(pivot);
+        Array2D_double_delete(N, N, lu);
         Array2D_double_delete(N, N, A);
 
         return result;

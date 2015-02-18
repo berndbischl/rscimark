@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
 #include "FFT.h"
 
+#include "Rf_error.h"
+
 #define PI  3.1415926535897932
+
 
 /*-----------------------------------------------------------------------*/
 
@@ -26,10 +28,9 @@ static int int_log2 (int n)
     for(/*k=1*/; k < n; k *= 2, log++);
     if (n != (1 << log))
     {
-      printf("FFT: Data length is not a power of 2!: %d ",n);
-      exit(1);
+      Rf_error("FFT: Data length is not a power of 2!: %d ",n);
     }
-    return log; 
+    return log;
 }
 
 static void FFT_transform_internal (int N, double *data, int direction) {
@@ -42,7 +43,7 @@ static void FFT_transform_internal (int N, double *data, int direction) {
     logn = int_log2(n);
 
 
-    if (N == 0) return;    
+    if (N == 0) return;
 
     /* bit reverse the input data for decimation in time algorithm */
     FFT_bitreverse(N, data) ;
@@ -66,13 +67,13 @@ static void FFT_transform_internal (int N, double *data, int direction) {
 
         double wd_real = data[j] ;
         double wd_imag = data[j+1] ;
-          
+
         data[j]   = data[i]   - wd_real;
         data[j+1] = data[i+1] - wd_imag;
         data[i]  += wd_real;
         data[i+1]+= wd_imag;
       }
-      
+
       /* a = 1 .. (dual-1) */
       for (a = 1; a < dual; a++) {
         /* trignometric recurrence for w-> exp(i theta) w */
@@ -88,7 +89,7 @@ static void FFT_transform_internal (int N, double *data, int direction) {
 
           double z1_real = data[j];
           double z1_imag = data[j+1];
-              
+
           double wd_real = w_real * z1_real - w_imag * z1_imag;
           double wd_imag = w_real * z1_imag + w_imag * z1_real;
 
@@ -106,7 +107,7 @@ void FFT_bitreverse(int N, double *data) {
     /* This is the Goldrader bit-reversal algorithm */
     int n=N/2;
     int nm1 = n-1;
-    int i=0; 
+    int i=0;
     int j=0;
     for (; i < nm1; i++) {
 
@@ -127,13 +128,13 @@ void FFT_bitreverse(int N, double *data) {
         data[jj]   = tmp_real;
         data[jj+1] = tmp_imag; }
 
-      while (k <= j) 
+      while (k <= j)
       {
         /*j = j - k ; */
         j -= k;
 
         /*k = k / 2 ;  */
-        k >>= 1 ; 
+        k >>= 1 ;
       }
       j += k ;
     }
@@ -159,7 +160,7 @@ void FFT_inverse(int N, double *data)
     norm=1/((double) n);
     for(i=0; i<N; i++)
       data[i] *= norm;
-  
+
 }
 
 
