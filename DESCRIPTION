@@ -1,18 +1,17 @@
 Package: rscimark
-Title: rscimark
-Description: Miscellaneous helper functions for and from B. Bischl and
-    some other guys at TU Dortmund, mainly for package development.
+Title: SciMark 2.0 Benchmark for Scientific and Numerical Computing
+Description: The SciMark 2.0 benchmark was originally developed in Java as a benchmark for numerical and scientific computational performance. It measures the performance of several computational kernels which are frequently occuring in scientific applications. This package is a simple wrapper around the ANSI C implementation of the benchmark.
 Authors@R: c(person("Bernd", "Bischl", email = "bernd_bischl@gmx.net",
-    role = c("aut", "cre"))) 
-URL: https://github.com/berndbischl/scimark
+    role = c("aut", "cre")), person("Jakob", "Bossek", email = "j.bossek@gmail.com", role = c("aut")))
+URL: https://github.com/berndbischl/rscimark
 BugReports: https://github.com/berndbischl/rscimark/issues
 License: BSD_2_clause + file LICENSE
 Encoding: UTF-8
-Roxygen: list(wrap = FALSE)
 Imports:
-  checkmate
+    checkmate
 Suggests:
     testthat
 LazyData: yes
 ByteCompile: yes
 Version: 1.0
+RoxygenNote: 5.0.1
