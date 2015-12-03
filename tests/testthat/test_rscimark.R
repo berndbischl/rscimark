@@ -3,6 +3,7 @@ test_that("rscimark", {
     expect_true(is.numeric(x))
     expect_true(length(x) == 6L)
     expect_true(!any(is.na(x) | is.nan(x)))
+    expect_true(!is.null(names(x)))
   }
 
   y = rscimark(minimum.time = 0.2)
