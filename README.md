@@ -1,13 +1,13 @@
 # rscimark
 
-This package offers a single function `rscimark`, which is a simple wrapper
-around the [ANSI C version of the SciMark2 benchmark](http://math.nist.gov/scimark2/download_c.html). [SciMark](http://math.nist.gov/scimark) is a benchmark for numerical computing and scientific computing. Concicely the computational kernels Fast Fourier Transformation (FFT), Gauss-Seidel relaxation, Sparse matrix-multiply, Monte Carlo integration, and dense LU factorization are used as indicators for the performance.
-
 [![CRAN Status Badge](http://www.r-pkg.org/badges/version/rscimark)](http://cran.r-project.org/web/packages/rscimark)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/rscimark)](http://cran.rstudio.com/web/packages/rscimark/index.html)
 [![Build Status](https://travis-ci.org/berndbischl/rscimark.svg)](https://travis-ci.org/berndbischl/rscimark)
 [![Build status](https://ci.appveyor.com/api/projects/status/4b468f5phkb4lmeq/branch/master?svg=true)](https://ci.appveyor.com/project/berndbischl/rscimark/branch/master)
 [![Coverage Status](https://coveralls.io/repos/berndbischl/rscimark/badge.svg)](https://coveralls.io/r/berndbischl/rscimark)
+
+This package offers a single function `rscimark`, which is a simple wrapper
+around the [ANSI C version of the SciMark2 benchmark](http://math.nist.gov/scimark2/download_c.html). [SciMark](http://math.nist.gov/scimark) is a benchmark for numerical computing and scientific computing. Concicely the computational kernels Fast Fourier Transformation (FFT), Gauss-Seidel relaxation, Sparse matrix-multiply, Monte Carlo integration, and dense LU factorization are used as indicators for the performance.
 
 # Installation
 
